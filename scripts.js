@@ -5,9 +5,26 @@ let cellValues = {};
 let cellClassName = {};
 const wordsPerPage = 2;
 words = words.map(word => word.toUpperCase());
-let containerId = (document.querySelector('#tableContainer')) ? '#tableContainer' : '#tableContainerDifficile';
-let classCssDifficulte = (document.querySelector('#tableContainer')) ? 'facile' : 'difficile';
-let classCssUppercaseOrNot = (document.querySelector('#tableContainer')) ? ' _blank_facile' : ' _blank_difficile';
+let containerId = "";
+let classCssDifficulte = "";
+let classCssUppercaseOrNot = "";
+if(document.querySelector('#tableContainer')) {
+    containerId = "#tableContainer";
+    classCssDifficulte = "facile";
+    classCssUppercaseOrNot = " _blank_facile";
+}
+if(document.querySelector('#tableContainerDifficile')) {
+    containerId = '#tableContainerDifficile';
+    classCssDifficulte = "difficile";
+    classCssUppercaseOrNot = " _blank_difficile";
+}
+
+if(document.querySelector('#tableContainerMoyen')) {
+    containerId = '#tableContainerMoyen';
+    classCssDifficulte = "moyen";
+    classCssUppercaseOrNot = " _blank_moyen";
+}
+
 function createTable() {
     let container = document.querySelector(containerId);
     container.innerHTML = '';
@@ -67,28 +84,14 @@ function createTable() {
             
                 if (correspondingCell.textContent === this.textContent) {
                     this.classList.add('cl-green');
+                    this.classList.remove('cl-red');
                 } else {
                     this.classList.add('cl-red');
+                    this.classList.remove('cl-green');
                 }
                 cellValues[cellKey] = data;
                 cellClassName[cellKey] = Array.from(this.classList);
                 
-            });
-            blankCell.addEventListener('touchend', function(event) {
-                event.preventDefault();
-                let data = event.dataTransfer.getData('text/plain');
-                this.textContent = data;
-                
-                let previousRow = this.parentNode.previousElementSibling;
-                let correspondingCell = previousRow.children[this.cellIndex];
-            
-                if (correspondingCell.textContent === this.textContent) {
-                    this.classList.add('cl-green');
-                } else {
-                    this.classList.add('cl-red');
-                }
-                cellValues[cellKey] = data;
-                cellClassName[cellKey] = Array.from(this.classList);
             });
             blankCell.addEventListener('click', function(event) {
                 this.textContent = '';
@@ -123,9 +126,6 @@ function displayWords() {
             
             li.setAttribute('draggable', 'true');
             li.addEventListener('dragstart', function(event) {
-                event.dataTransfer.setData('text/plain', this.textContent);
-            });
-            li.addEventListener('touchstart', function(event) {
                 event.dataTransfer.setData('text/plain', this.textContent);
             });
             li.appendChild(span);
