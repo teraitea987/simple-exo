@@ -1,0 +1,102 @@
+
+@font-face {
+    font-family: cursiveFont;
+    src: url(./fonts/Dancing_Script/DancingScript-VariableFont_wght.ttf);
+  }
+
+
+table tr td {
+    border: 1px solid black;
+    margin: 0;
+    padding: 0;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 40px;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+ul li {
+    list-style: none;
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: lowercase;
+}
+
+ul { 
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+
+.exo-content {
+    display: flex;
+    align-items: center;
+}
+
+.exo-content img {
+    margin-right: 10px;
+    width: 150px;
+}
+
+.letter-drag  {
+    padding: 35px 50px;
+    margin: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    border-style: solid;
+    border-color: rgba(83, 43, 156, 0.219);
+    border-width: 2px;
+}
+
+.blank-cell-script {
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: lowercase;
+}
+
+#paginationContainer {
+    display: flex;
+    justify-content: center;
+}
+
+
+#paginationContainer button {
+    padding: 10px 15px;
+    border-radius: 25%;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+.cl-red {
+    background-color: red;
+}
+
+.cl-green {
+    background-color: green;
+}
+
+.facile {
+    color: red;
+}
+.difficile {
+    color: blue;
+}
+
+._blank_difficile {
+    font-family: cursiveFont, Arial, Helvetica, sans-serif;
+    text-transform: lowercase;
+    font-size: 70px;
+}
+
+._blank_facile {
+    text-transform: uppercase;
+}
