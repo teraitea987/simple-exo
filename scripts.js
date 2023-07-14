@@ -43,14 +43,20 @@ function createTable() {
             if (cellValues[cellKey]) {
                 blankCell.textContent = cellValues[cellKey];
             }
+
             blankCell.className = cell.className + '_verif blank-cell-script' + classCssUppercaseOrNot;
             if (cellClassName[cellKey]) {
                 blankCell.className += ' ' + cellClassName[cellKey].join(' ');
             }
+
             blankCell.addEventListener('dragover', function(event) {
                 event.preventDefault();
             });
             
+            blankCell.addEventListener('touchmove', function(event) {
+                event.preventDefault();
+            });
+
             blankCell.addEventListener('drop', function(event) {
                 event.preventDefault();
                 let data = event.dataTransfer.getData('text/plain');
@@ -67,6 +73,22 @@ function createTable() {
                 cellValues[cellKey] = data;
                 cellClassName[cellKey] = Array.from(this.classList);
                 
+            });
+            blankCell.addEventListener('touchend', function(event) {
+                event.preventDefault();
+                let data = event.dataTransfer.getData('text/plain');
+                this.textContent = data;
+                
+                let previousRow = this.parentNode.previousElementSibling;
+                let correspondingCell = previousRow.children[this.cellIndex];
+            
+                if (correspondingCell.textContent === this.textContent) {
+                    this.classList.add('cl-green');
+                } else {
+                    this.classList.add('cl-red');
+                }
+                cellValues[cellKey] = data;
+                cellClassName[cellKey] = Array.from(this.classList);
             });
             blankCell.addEventListener('click', function(event) {
                 this.textContent = '';
@@ -103,7 +125,9 @@ function displayWords() {
             li.addEventListener('dragstart', function(event) {
                 event.dataTransfer.setData('text/plain', this.textContent);
             });
-    
+            li.addEventListener('touchstart', function(event) {
+                event.dataTransfer.setData('text/plain', this.textContent);
+            });
             li.appendChild(span);
         });
 
