@@ -8,6 +8,10 @@ words = words.map(word => word.toUpperCase());
 let containerId = "";
 let classCssDifficulte = "";
 let classCssUppercaseOrNot = "";
+let good = new Audio('./audio/good.mp3');
+let bad = new Audio('./audio/bad.mp3');
+
+
 if(document.querySelector('#tableContainer')) {
     containerId = "#tableContainer";
     classCssDifficulte = "facile";
@@ -85,9 +89,11 @@ function createTable() {
                 if (correspondingCell.textContent === this.textContent) {
                     this.classList.add('cl-green');
                     this.classList.remove('cl-red');
+                    good.play();
                 } else {
                     this.classList.add('cl-red');
                     this.classList.remove('cl-green');
+                    bad.play();
                 }
                 cellValues[cellKey] = data;
                 cellClassName[cellKey] = Array.from(this.classList);
